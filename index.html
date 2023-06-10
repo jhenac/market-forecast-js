@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/86e6ea146f.js" crossorigin="anonymous"></script>
+
+<style>
+    body {
+    background-color: #DAE3F4;
+    }
+
+    img {
+        width: 100%;
+        padding: 1% 0;
+    }
+
+    .form-row {
+        padding: 1% 0;
+    }
+
+    .form-column1 {
+        padding-left: 30%;
+    }
+
+    input {
+        width: 40%;
+    }
+
+    .buttonrow {
+        padding: 0 35%;
+    }
+
+    button {
+        width: 150px;
+        margin: 10% 2% 2% 0;
+    }
+
+    #fbutton{
+        background-color: #2F5596;
+        font-weight: bold;
+    }
+
+    #rbutton{
+        background-color: #D54135;
+        font-weight: bold;
+    }
+
+    .resultdiv{
+        padding: 2% 0;
+    }
+
+    #rate {
+        color: blue;
+    }
+
+    footer {
+        padding: 3% 3% 1% 0;
+        bottom: 0;
+        color: grey;
+        font-size: 10px;
+    }
+
+
+
+
+</style>
+
+<script>
+    function myForecast(){
+        var inflation = document.getElementById("inflation").value * 1;
+        var revenue = document.getElementById("revenue").value * 1;
+        var policy = document.getElementById("policy").value * 1;
+
+        if (inflation<=6.2 && revenue>22.3){
+            forecast = (0.0085*inflation + 0.0993*policy + 0.9394).toFixed(4); // Rule1
+        }else if(inflation>4.05 && inflation<=5.75 && revenue>22.3){
+            forecast = (0.0221*inflation + 0.0052*revenue + 0.0415*policy + 0.9252).toFixed(4); // Rule2
+        }else if(policy<=2.375 && inflation>3.35 && inflation<=4.1){
+            forecast = (0.0311* inflation + 0.0005 * revenue + 0.0636 * policy + 0.9176).toFixed(4); // Rule3
+        }else if(policy>4 && inflation>7.85){
+            forecast = (0.1404*inflation + 0.0001*revenue + 0.2782*policy + 1.5991).toFixed(4); // Rule4
+        }else if(policy<=4 && inflation<=5.15){
+            forecast = (0.1984*inflation - 0.0078*revenue + 0.1219*policy + 0.1502).toFixed(4); // Rule5
+        }else if(policy>2.875 && policy<=4){
+            forecast = (0.5685*inflation - 0.0004*revenue + 0.1577*policy - 1.9833).toFixed(4); // Rule6
+        }else if(inflation>6.5 && revenue<=51.3){
+            forecast = (-0.4216*inflation - 0.0027*revenue + 0.8186*policy + 3.1131).toFixed(4); // Rule7
+        }else{
+            forecast = (0.7427*inflation + 0.3828*policy - 3.8654).toFixed(4); // Rule8
+        }
+
+        document.getElementById("rate").innerHTML = forecast;
+    }
+
+    function reset(){
+        document.getElementById("input").reset();
+        document.getElementById("rate").innerHTML = '';
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dss_nablo</title>
+</head>
+<body>
+
+<div id="img">
+    <img src="header2.png" alt="header">
+</div>
+
+
+<div id="form">
+    <form action="" id="input">
+        <div class="row form-row">
+            <div class="col col-lg-6 col-sm-12 form-column1">
+                <label for="inflation">Inflation Rate:</label>
+            </div>
+            <div class="col col-lg-6 col-sm-12">
+                <input type="number" id="inflation" name="inflation">
+            </div>
+        </div>
+
+        <div class="row form-row">
+            <div class="col col-lg-6 col-sm-12 form-column1">
+                <label for="revenue">Revenue (Php):</label>
+            </div>
+            <div class="col col-lg-6 col-sm-12">
+                <input type="number" id="revenue" name="revenue">
+            </div>
+        </div>
+
+        <div class="row form-row">
+            <div class="col col-lg-6 col-sm-12 form-column1">
+                <label for="policy">BSP Policy Rate:</label>
+            </div>
+            <div class="col col-lg-6 col-sm-12">
+                <input type="number" id="policy" name="policy">
+            </div>
+        </div>
+    </form>
+
+    <div id="buttondiv">
+        <div class="row buttonrow" align="center">
+            <div class="col col-lg-6 col-sm-12">
+                <button id="fbutton" onclick="myForecast()">Projection</button>
+            </div>
+            <div class="col col-lg-6 col-sm-12">
+                <button id="rbutton" onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row resultdiv">
+    <div class="col col-lg-12 col-sm-12" align="center">
+        <h3>Market Rate: <span id="rate"></span></h3>
+    </div>
+</div>
+
+<footer>
+    <div align="right">
+        <p>© 2023 Guena Nablo. All rights reserved. <a href="mailto: ganablo@alum.up.edu.ph" class="fa-solid fa-envelope"></a><br>
+            For app commissions, click here 👉 <a href="mailto: jacajeras@gmail.com" class="fa-solid fa-paper-plane"></a></p>
+    </div>
+</footer>
+</body>
+</html>
