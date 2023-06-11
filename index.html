@@ -62,10 +62,14 @@
         bottom: 0;
         color: grey;
         font-size: 10px;
+        text-align: right;
     }
 
-
-
+    @media screen and (max-width: 600px) {
+        footer {
+            text-align: center;
+        }
+    }
 
 </style>
 
@@ -100,30 +104,6 @@
         document.getElementById("input").reset();
         document.getElementById("rate").innerHTML = '';
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 
@@ -186,12 +166,14 @@
         <h3>Market Rate: <span id="rate"></span></h3>
     </div>
 </div>
+</body>
 
 <footer>
-    <div align="right">
+    <div>
         <p>© 2023 Guena Nablo. All rights reserved. <a href="mailto: ganablo@alum.up.edu.ph" class="fa-solid fa-envelope"></a><br>
-            For app commissions, click here 👉 <a href="mailto: jacajeras@gmail.com" class="fa-solid fa-paper-plane"></a></p>
+            For app commissions, click here 👉 <a href="mailto: jacajeras@gmail.com" class="fa-solid fa-paper-plane"></a><br>
+            <a href="https://github.com/jhenac/market-forecast-js/blob/master/index.html">Source Code</a></p>
     </div>
 </footer>
-</body>
+
 </html>
